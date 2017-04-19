@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 
 		txtView.setText("" + obj.getString()); // 打印参数a的值到TextView中
 
-		// lua调用Java对象
+		// 实例2.lua调用Java对象
 		CData value = new CData();
 		L.getField(LuaState.LUA_GLOBALSINDEX, "heihei");// 获取(或者说，是定位？)lua的heihei函数
 		try {
