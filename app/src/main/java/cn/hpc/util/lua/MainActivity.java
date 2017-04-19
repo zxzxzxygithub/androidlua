@@ -32,12 +32,12 @@ public class MainActivity extends Activity {
 		// setContentView(tv);
 
 		TextView txtView = (TextView) this.findViewById(R.id.helloTxt);
-
+//      *1、初始化
 		LuaState L = LuaStateFactory.newLuaState();
 		L.openLibs();
-
+//      *2、加载lua脚本
 		L.LdoString(loadAssetsString("lua/hello.lua"));
-
+//      *3、调用脚本的函数的流程，1，函数名，2，参数1，参数2，3，调用call（参数个数，返回的参数个数）4，保存返回值 5，获取返回值
 		// 实例1.Java调用lua函数
 		L.getField(LuaState.LUA_GLOBALSINDEX, "plus"); // 取得lua里的plus函数
 		L.pushNumber(12); // 传递参数1给plus函数
@@ -52,6 +52,11 @@ public class MainActivity extends Activity {
 		// 实例2.lua调用Java对象
 		CData value = new CData();
 		L.getField(LuaState.LUA_GLOBALSINDEX, "heihei");// 获取(或者说，是定位？)lua的heihei函数
+		//lua 的heihei函数中调用java的类的inc方法
+//		function heihei(value)
+//		value:inc();
+//		value:inc();
+//		value:inc();
 		try {
 			L.pushObjectValue(value); // 将value对象传递给heihei函数
 		} catch (LuaException e) {
